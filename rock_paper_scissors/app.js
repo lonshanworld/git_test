@@ -172,5 +172,8 @@ btn.addEventListener("click",function(){
 
 
 
-
-
+// Start footerdate
+const footerdate = document.getElementById("footeryear");
+let date = new Date();
+let currentyear = date.getFullYear();
+footerdate.innerText = currentyear;

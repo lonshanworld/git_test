@@ -386,3 +386,13 @@ header>#title {
     box-shadow: none;
     color: #2c5777;
 }
+
+
+/* Start footer */
+footer{
+    text-align: center;
+    background-color: var(--vartext);
+    color: var(--varbackground);
+
+    padding: 10px;
+}

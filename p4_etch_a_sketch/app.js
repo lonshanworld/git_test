@@ -142,3 +142,11 @@ function eraser(){
         signeraser.style.display = "none";
     }
 }
+
+
+
+// footer date
+const footerdate = document.getElementById("footeryear");
+let date = new Date();
+let currentyear = date.getFullYear();
+footerdate.innerText = currentyear;

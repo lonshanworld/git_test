@@ -167,3 +167,13 @@ th{
     font-size: 30px;
     border-bottom: 2px solid black;
 }
+
+
+/* Start footer */
+footer{
+    text-align: center;
+    background-color: var(--vartext);
+    color: var(--varbackground);
+
+    padding: 10px;
+}
