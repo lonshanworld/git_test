@@ -163,3 +163,9 @@ function changetext(unseentext) {
     changedunseentext = unseentext.join("");
     console.log("After :" + unseentext);
 }
+
+
+const year = document.getElementById("year");
+let date = new Date();
+let curyear = date.getFullYear();
+year.innerText = curyear;
