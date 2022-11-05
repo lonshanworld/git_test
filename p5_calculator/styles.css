@@ -1,0 +1,138 @@
+:root{
+    --varbackground: white;
+    --vartext: black;
+    --varsign: orange;
+    --varmoonandsun: rgb(0, 140, 255);
+    --varbtnbg: rgb(182, 220, 238);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--varbackground);
+    color: var(--vartext);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+#calculator{
+    width: 300px;
+    height: 400px;
+    background-color: var(--varbackground);
+
+    border-radius: 30px;
+
+    box-shadow: rgba(255, 165, 0, 0.25) 0px 24px 60px, rgba(255, 165, 0, 0.12) 0px -12px 50px, rgba(255, 165, 0, 0.12) 0px 4px 6px, rgba(255, 165, 0, 0.17) 0px 12px 13px, rgba(255, 165, 0, 0.09) 0px -10px 5px;
+}
+
+#spacing{
+    margin: 15px;
+    background-color: var(--varbackground);
+
+    width: 90%;
+    height: 93%;
+}
+
+
+/* Start Switch Button Theme Section  */
+#darkandlight {
+    position: fixed;
+    z-index: 100;
+
+    bottom: 20px;
+    right: 20px;
+
+    transition: all 0.5s;
+}
+
+.dlbtn {
+    border: none;
+    background-color: var(--varbtnbg);
+    color: var(--varmoonandsun);
+    font-size: 30px;
+
+    width: 50px;
+    height: 50px;
+
+    box-shadow: rgba(0, 60, 255, 0.25) 0px 54px 55px, rgba(0, 60, 255, 0.12) 0px -12px 30px, rgba(0, 60, 255, 0.12) 0px 4px 6px, rgba(0, 60, 255, 0.17) 0px 12px 13px, rgba(0, 60, 255, 0.09) 0px -3px 5px;
+    border-radius: 50%;
+}
+
+#iconms {
+    margin-top: 5px;
+}
+
+/* End Switch Button Theme Section */
+
+
+
+/* Start calculationresult section */
+#calculationresultbox{
+    font-size: 40px;
+    padding-top: 5px;
+    display: grid;
+    grid-template-columns: 30px auto;
+}
+/* End calculationresult section */
+
+
+
+/* start underline section  */
+
+/* end underline section */
+
+
+
+/* Start calculation section  */
+#calculation{
+    height: 81.5%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}    
+/* End calculation section */
+
+
+/* Start button style  */
+button{
+    background-color: var(--varbackground);
+    border: none;
+    color: var(--vartext);
+    font-size: 20px;
+
+    border-radius: 10px;
+}
+
+button:active{
+    background-color: grey;
+}
+
+.sign{
+    color: var(--varsign);
+}
+
+#equalsign{
+    background-color: var(--varsign);
+    color: var(--varbackground);
+    border-radius: 50%;
+}
+/* End button style */
+
+
+/* start textnumber */
+#textnumber{
+    text-align: right;
+    height: 47px;
+
+
+    overflow: hidden;
+}
+/* End textnumber */
