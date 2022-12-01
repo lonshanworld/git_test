@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    font-family: 'Lato', sans-serif;
+    background-color: rgb(241, 241, 192);
+}
+
+
+
+
+
+/* Start navbar section  */
+#nav {
+    background-color: lightblue;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar>span {
+    flex: 2;
+    text-align: start;
+    user-select: none;
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+    text-shadow: 2px 2px 5px #FEFF40;
+}
+
+@media screen and (min-width : 800px) {
+    #navbar>span{
+        padding-left: 50px;
+    }
+}
+
+#navbar>div {
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* .navbtns{
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+} */
+
+
+.navbtns {
+    background-color: rgb(33, 175, 223);
+    border: 1px solid #0077CC;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    direction: ltr;
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: -.022em;
+    line-height: 1.47059;
+    min-width: 30px;
+    overflow: visible;
+    padding: 5px 10px;
+    text-align: center;
+    user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.navbtns:disabled {
+    cursor: default;
+    opacity: .3;
+}
+
+.navbtns:hover {
+    background-image: linear-gradient(#51A9EE, #147BCD);
+    border-color: #1482D0;
+    text-decoration: none;
+}
+
+.navbtns:active {
+    background-image: linear-gradient(#3D94D9, #0067B9);
+    border-color: #006DBC;
+    outline: none;
+}
+
+.button-15:focus {
+    box-shadow: rgba(131, 192, 253, 0.5) 0 0 0 3px;
+    outline: none;
+}
+
+#addbtn {
+    display: block;
+}
+
+/* End navbar section */
+
+
+
+
+
+
+/* Start book section  */
+#booksec{
+    display: grid;
+    padding: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.books{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 3px solid white;
+    border-radius: 20px;
+}
+
+.bookimg{
+    width: 100%;
+}
+
+.bookimg > img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.bookbigText{
+    font-size: 16px;
+    font-weight: 900;
+    font-style: italic;
+    color: black;
+}
+
+.booksmallText{
+    font-size: 14px;
+    color: rgb(58, 58, 58);
+}
+
+.bookbtns > button{
+    margin: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+}
+
+.bookreadbtn{
+    background-color: rgb(0, 191, 255);
+}
+
+.bookdeletebtn{
+    background-color: rgb(245, 40, 40);
+}
+/* End book section */
+
+
+
+
+/* Start form section  */
+legend{
+    font-weight: bold;
+    color: grey;
+}
+
+#formsec{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#formdiv{
+    width: 320px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* End form section */

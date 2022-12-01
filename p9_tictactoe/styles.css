@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+#all{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+/* Start title section  */
+#title{
+    text-align: center;
+    font-size: 50px;
+    display: block;
+    line-height: 100%;
+    user-select: none;
+}
+
+.fa-circle-xmark{
+    font-size: 30px;
+}
+
+.dot{
+    font-weight: 900;
+    font-size: 100px;
+}
+/* End title section */
+
+
+
+/* Start name section  */
+#names{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    /* display: none; */
+}
+
+#player1name, #player2name{
+    font-weight: bold;
+    font-style: italic;
+}
+/* End name section */
+
+
+
+/* Start result section  */
+#result{
+    text-align: center;
+    /* display: none; */
+    display: block;
+}
+
+#resulttable{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#resultdiv{
+    border: 3px double black;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.spacing{
+    width: 20px;
+}
+
+#result1, #result2{
+    font-weight: bold;
+}
+/* End result section */
+
+
+
+/* Start playground section  */
+#playground{
+    padding-bottom: 30px;
+    padding-top: 20px;
+    /* display: none; */
+    display: block;
+    user-select: none;
+}
+
+#playground > table{
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boxes{
+    height: 70px;
+    width: 70px;
+    border: 5px solid grey;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#playground > table tr td{
+    font-size: 35px;
+    user-select: none;
+}
+
+#playground > table tr:first-child td{
+    border-top: none;
+}
+
+#playground > table tr:last-child td{
+    border-bottom: none;
+}
+
+#playground > table tr td:first-child{
+    border-left: none;
+}
+
+#playground > table tr td:last-child{
+    border-right: none;
+}
+/* End playground section */
+
+
+
+/* Start buttons section  */
+#buttons{
+    text-align: center;
+    /* display: none; */
+    display: block;
+    user-select: none;
+}
+
+.btns {
+  background-color: #FFFFFF;
+  border: 1px solid #222222;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #222222;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 5px 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
+  user-select: none;
+  width: auto;
+}
+
+.btns:active {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: #000000;
+  transform: scale(.96);
+}
+/* End buttons section */
+
+
+
+/* Start footer section  */
+footer{
+    position: fixed;
+    bottom: 0;
+    background-color: grey;
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 12px;
+}
+/* End footer section */
+
+
+
+
+/* Start inputform section  */
+#inputform{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: none; */
+    user-select: none;
+}
+
+legend{
+    font-size:18px;
+    font-weight: bold;
+    color: grey;
+}
+
+#inputform > form{
+    width: 280px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#player2div{
+    display: none;
+}
+/* End inputform section */
+
+
+
+/* Start ckts section  */
+#ckts{
+    display: none;
+}
+
+#cktsbtn{
+    font-size: 20px;
+}
+/* End ckts section */
+
+
+
+
+/* Start endgame section  */
+#endgame{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+#gamefinished{
+    background-color: lightblue;
+    width: 250px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#bigtextendgame{
+    font-size: 16px;
+    font-weight: bold;
+    color: grey;
+}
+
+#announcement{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 3px solid black;
+}
+
+#resulttableinend{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#resultdivinend{
+    border: 3px double black;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.spacinginend{
+    width: 20px;
+}
+
+#result1inend, #result2inend{
+    font-weight: bold;
+}
+/* End endgame section */
