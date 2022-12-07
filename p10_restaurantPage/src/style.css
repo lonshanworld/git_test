@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');  */
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(to left,#800020, #FF0B48);
+    font-family: "Poppins";
+    position: relative;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* min-height: 100vh; */
+    /* min-height: 100vh; */
+    text-align: center;
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+#nav{
+    background-color: darkorange;
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    font-size: 35px;
+
+    position: sticky;
+    top: 0;
+}
+
+@media screen and (max-width: 800px){
+    #nav{
+        flex-direction: column;
+    }
+}
+
+#header{
+    margin-left: 10px;
+}
+
+.navicons{
+    width: 30px;
+    margin-left: 30px;
+}
+
+#headerdiv{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbtnsdiv{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbtns{
+    background-color: transparent;
+    /* border: 2px solid black; */
+    border: none;
+    /* border-radius: 5px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 20px;
+    color: black;
+}
+
+.navbtns:active{
+    color: grey;
+}
+
+.visiblediv{
+    display: block;
+}
+
+.hidediv{
+    display: none;
+}
