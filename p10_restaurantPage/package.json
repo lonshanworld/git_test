@@ -1,9 +1,9 @@
 {
-  "name": "p10_restaurantpage",
+  "name": "p10_restaurantPage",
   "version": "1.0.0",
   "main": "index.js",
   "repository": {
-    "url": "git+https://github.com/lonshanworld/git_test_odin.git"
+    "url": "git+https://github.com/lonshanworld/git_test_odin/p10_restaurantPage.git"
   },
   "scripts": {
     "build": "webpack --mode=development",
