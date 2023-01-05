@@ -6,7 +6,6 @@
     "url": "git+https://github.com/lonshanworld/git_test_odin/p10_restaurantPage.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=development",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
