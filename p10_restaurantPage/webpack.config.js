@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     mode: "development",
     entry: './src/index.js',
-    // assetsPublicPath: '/p10_restaurantPage/',
+    assetsPublicPath: '/p10_restaurantPage/',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
