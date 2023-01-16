@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+:root{
+    --varbgClr : #cfdce7;
+    --vartaskbgClr : #edf0f3;
+    --varmainClr : #064780;
+    --varyellowClr : rgb(253, 202, 34);
+    --varlightyellowClr : rgb(235, 228, 170);
+    --vardarkorangeClr : rgb(255, 136, 0);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    background-color: var(--varbgClr);
+    font-family: 'Montserrat';
+    color: var(--varmainClr);
+    font-size: 12px;
+    position: relative;
+}
+
+
+/* Start Header Section  */
+header{
+    /* background-color: var(--varmainClr); */
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--varmainClr);
+}
+
+#headtext{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#btnmenu{
+    display: none;
+}
+
+#btnadd{
+    display: none;
+}
+/* End Header Section */
+
+
+
+/* Start all component section */
+#allComponent{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+}
+/* End all conponent section */
+
+
+
+
+/* Start left section  */
+#left{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+#leftboxdiv{
+    background-color: var(--varyellowClr);
+    border-radius: 20px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.lefttitleOne{
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: 5px solid var(--varmainClr);
+    text-align: center;
+}
+
+.lefttitletwo{
+    font-size: 16px;
+}
+
+#leftcomponents{
+    text-align: center;
+}
+
+#leftcomponents > button {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--varbgClr);
+    background-color: var(--varmainClr);
+    border: none;
+    padding: 10px 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+#leftcomponents > button:active{
+    background-color: #022b50;
+}
+
+.fa-circle-check{
+    font-size: 12px;
+    color: var(--varyellowClr);
+    padding-left: 5px;
+}
+/* End left section */
+
+
+
+
+/* Start middle section  */
+#middle{
+    grid-column-start: 2;
+    grid-column-end: 5;
+    /* background-color: red; */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+/* End middle section */
+
+
+
+
+/* Start right section */
+#right{
+    grid-column-start: 5;
+    grid-column-end: 7;
+}
+
+#rightboxdiv{
+    background-color: var(--varmainClr);
+    color: var(--varyellowClr);
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 20px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+form{
+    font-size: 12;
+}
+
+.righttitleOne{
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: 5px solid var(--varyellowClr);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+input[type="datetime-local"]{
+    border: none;
+    background-color: transparent;
+    color: var(--varyellowClr);
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid var(--varyellowClr);
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="radio"]{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input[type="radio"]:checked{
+    appearance: none;
+    -webkit-appearance: none;
+
+    border-radius: 50%;
+    background: var(--varyellowClr);
+    border: 3px solid white;
+    box-shadow: 0 0 0 3px var(--varyellowClr);
+    padding: 4px;
+}
+
+/* for color change in chrome calender default icon */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23FDCA22" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+input[type="text"]{
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid var(--varyellowClr);
+    color: var(--varyellowClr);
+    box-shadow: none;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+input[type="text"]:focus{
+    border: none;
+    box-shadow: none;
+    outline: none;
+    border-bottom: 2px solid var(--varyellowClr);
+}
+
+.tasktypediv{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 5px;
+}
+
+
+#rightbtndiv{
+    text-align: end;
+}
+
+#rightbtndiv > button{
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--varmainClr);
+    background-color: var(--varyellowClr);
+    border: none;
+    padding: 10px 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+#rightbtndiv > button:active{
+    background-color: orange;
+}
+/* End right section  */
+
+
+
+
+
+/* For table view */
+@media screen and (max-width: 930px){
+
+    #btnadd{
+        position: fixed;
+        top: 40px;
+        right: 10px;
+        z-index: 10;
+        border: none;
+        background-color: var(--varmainClr);
+        color: var(--varyellowClr);
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+       
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    
+        padding: 7px 14px;
+        margin-right: 10px;
+    }
+
+    #btnadd:active{
+        background-color: #012646;
+    }
+
+    #middle{
+        grid-column-end: 7;
+    }
+
+    #right{
+        display: none;
+        /* display: block; */
+        width: 300px;
+        position: fixed;
+        top: 80px;
+        right: 0px;
+        z-index: 5;
+    }
+
+    #left{
+        display: block;
+    }
+}
+
+
+
+
+/* For mobile view */
+@media screen and (max-width: 450px){
+
+    #btnmenu{
+        position: fixed;
+        top: 40px;
+        left: 10px;
+        z-index: 10;
+        border: none;
+        background-color: var(--varyellowClr);
+        color: var(--varmainClr);
+        border-radius: 5px;
+        font-size: 20px;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    
+        padding: 7px 7px;
+        margin-left: 10px;
+    }
+
+    #btnmenu:active{
+        background-color: var(--vardarkorangeClr);
+    }
+
+    #middle{
+        grid-column-start: 1;
+    }
+
+    #left{
+        display: none;
+        width: 200px;
+        position: fixed;
+        top: 80px;
+        left: 0px;
+        z-index: 3;
+    }
+
+    #right{
+        display: none;
+    }
+}
