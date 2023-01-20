@@ -208,4 +208,13 @@ legend{
     border-radius: 10px;
 }
 
+input:invalid{
+    background-color: rgb(255, 212, 219);
+}
+
+#errortext{
+    color: lightpink;
+    font-size: 12px;
+    font-weight: bold;
+}
 /* End form section */

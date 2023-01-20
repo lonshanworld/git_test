@@ -94,11 +94,13 @@ function render(){
 
 }
 
+let errortext = document.getElementById("errortext");
 
 
 const formsec = document.getElementById("formsec");
 formsec.style.display = "none";
 function addbookform(){
+    errortext.textContent = "";
     formsec.style.display = "flex";
 }
 
@@ -115,21 +117,33 @@ let formdes = document.getElementById("formdes");
 let formpage = document.getElementById("formpage");
 let formimage = document.getElementById("formimage");
 let submitbtn = document.getElementById("submitbtn");
+let tagnameinputs = document.getElementsByTagName("input");
 
 submitbtn.addEventListener("click", function (e){
+    errortext.textContent = "";
     e.preventDefault();
     // console.log(formtitle.value);
     // console.log(formauthor.value);
     // console.log(formdes.value);
     // console.log(formpage.value);
     // console.log(formimage.value);
+    // console.log(formtitle.validity.valid);
+    if(formtitle.validity.valid || formauthor.validity.valid || formdes.validity.valid || formpage.validity.valid || formimage.validity.valid){
+        console.log(formimage.validity.typeMismatch);
+        if(formimage.validity.typeMismatch){
+            errortext.textContent = "Please enter valid Image URL";
+        }else{
+            formimage.setCustomValidity("");
+            const newbook = new book(formimage.value, formtitle.value, formauthor.value, formdes.value, formpage.value);
+            library.push(newbook);
+            // library.splice(library.length - 1,newbook);
 
-    const newbook = new book(formimage.value, formtitle.value, formauthor.value, formdes.value, formpage.value);
-    library.push(newbook);
-    // library.splice(library.length - 1,newbook);
-
-    render();
-    formsec.style.display = "none";
+            render();
+            formsec.style.display = "none";
+        }
+    }else{
+        errortext.textContent = "Please enter valid value";
+    }
 });
 
 
