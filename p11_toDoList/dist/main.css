@@ -22,9 +22,8 @@ body{
     background-color: var(--varbgClr);
     font-family: 'Montserrat';
     color: var(--varmainClr);
-    font-size: 12px;
+    font-size: 12px;    
     position: relative;
-    overflow-y: scroll;
 }
 
 
