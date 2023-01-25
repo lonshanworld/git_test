@@ -24,6 +24,7 @@ body{
     color: var(--varmainClr);
     font-size: 12px;
     position: relative;
+    overflow-y: scroll;
 }
 
 
