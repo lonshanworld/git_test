@@ -1,18 +1,18 @@
 const left = document.getElementById("left");
 const right = document.getElementById("right");
 
-function windowchange(){
-    if(window.innerWidth > 930){
-        right.style.display = "block"
-        left.style.display = "block"
-    }else if(window.innerWidth > 450){
-        left.style.display = "block";
-        right.style.display = "none"
-    }else{
-        left.style.display = "none";
-        right.style.display = "none";
-    }
-}
+// function windowchange(){
+//     if(window.innerWidth > 930){
+//         right.style.display = "block"
+//         left.style.display = "block"
+//     }else if(window.innerWidth > 450){
+//         left.style.display = "block";
+//         right.style.display = "none"
+//     }else{
+//         left.style.display = "none";
+//         right.style.display = "none";
+//     }
+// }
 
 
 
@@ -33,4 +33,4 @@ function rightdisplaychange(){
 }
 
 export {leftdisplaychange, rightdisplaychange};
-window.addEventListener("resize",windowchange);
+// window.addEventListener("resize",windowchange);
