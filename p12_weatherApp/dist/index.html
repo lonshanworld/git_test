@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="./main.css" rel="stylesheet" type="text/css" />
+    <title>Weather App</title>
+</head>
+<body>
+    <canvas></canvas>
+
+
+    <!-- Start loadingscreen section  -->
+    <section id="loadingsec">
+        <div id="loadingdiv">
+            <div id="loadingbox">
+                <div id="loader">
+                    <span>Getting location info...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End loadingscreen section -->
+
+
+
+    <!-- Start Errorscreen -->
+    <section id="errsec">
+        <div id="errdiv">
+            <div id="errbox">
+                <p>Something went wrong.</p>
+                <p>Error Detail : <span id="errormessage"></span></p>
+                <p>Please reload the page and try again.</p>
+                <button id="erreload">Reload</button>
+            </div>
+        </div>
+    </section>
+    <!-- End Errorscreen -->
+
+
+
+    <!-- Start Navbar section -->
+    <section id="nav">
+        <div id="titlediv">
+
+            <span class="maintitle"><i class="fas fa-cloud-sun-rain"></i> Check Weather</span>
+        </div>
+        <div id="searchdiv">
+            <input type="text" id="searchtext" placeholder="Search City...">
+            <button id="searchbtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+            <div id="gpsdiv">
+                <button id="currentgps"><i class="fa-solid fa-location-crosshairs"></i></button>
+            </div>
+        </div>
+    </section>
+    <!-- End Navbar section -->
+
+
+
+    <!-- Start Intro section  -->
+    <section id="introsec">
+        <div id="intro">
+            <div id="introtxtbox">
+                <p>Please search the city to know the weather.</p>
+                <p>( OR )</p>
+                <p>Please click the "GPS sign" button to know the weather of current location.</p>
+            </div>
+        </div>
+    </section>
+    <!-- End Intro section -->
+
+    
+    
+    <div id="weather">
+        <!-- Start Current Section  -->
+        <section id="currentdiv">
+            <p id="announcetxtone">Current weather of your city</p>
+            <div id="curdiv">
+                
+            </div>
+        </section>
+        <!-- End Current Section -->
+
+
+        <!-- Start all weather section  -->
+        <section id="alldiv">
+            <p id="announcetxttwo">All cities' weathers</p>
+            <div id="allweatherdivs">
+                <div id="minidiv">
+                
+                </div>
+            </div>
+        </section>
+        <!-- End all weather section -->
+    </div>
+
+
+    <!-- Start Footer section  -->
+    <footer>
+        <span id="footertxt">Copyright &copy; <span id="footeryear"></span> . All right reserved to Lon Shan.</span>
+    </footer>
+    <!-- End Footer section -->
+
+
+    <script src="main.js"></script>
+</body>
+</html>

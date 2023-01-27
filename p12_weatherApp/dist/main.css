@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+
+:root{
+    --varpurpleClr: rgb(255, 0, 242);
+    --varpinkpurpleClr : rgb(255, 74, 74);
+    --varlightblackClr: rgb(5, 5, 5);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/* html{
+    width: 100vw;
+} */
+
+body{
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    background-color: var(--varlightblackClr);
+    /* width: 100vw; */
+
+    font-family: 'Manrope', sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    position: relative;
+}
+
+canvas {
+    display: block;
+    z-index: -2;
+
+    position: absolute;
+
+}
+
+#weather{
+    display: none;
+    padding-top: 35px;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 2px 2px 6px rgb(156, 156, 156);
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(-45deg,rgba(255, 0, 242,0.7) 30%,rgba(255, 74, 74,0.7) 60%);
+
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(-45deg,var(--varpurpleClr) 30%,var(--varpinkpurpleClr) 60%);
+}
+
+
+
+
+/* Start intro section  */
+#introsec{
+    display: block;
+}
+
+#intro{
+    /* display: none; */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#introtxtbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.75); 
+    border-radius: 10px;
+    padding: 5px 20px;
+    font-weight: bold;
+
+    margin: 20px 40px;
+}
+/* End intro section */
+
+
+
+/* Start errorscreen */
+#errsec{
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 20;
+}
+
+#errdiv{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#errbox{
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 40px;
+    background-color: black;
+
+    margin: 20px 40px;
+
+    border-radius: 20px;
+}
+
+
+#erreload {
+  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  border: 0;
+  border-radius: 5px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+#erreload:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+#erreload:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+#erreload:active{
+    color: black;
+}
+/* End errorscreen */
+
+
+
+
+/* Starting loading section  */
+#loadingsec{
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#loadingdiv{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#loadingbox{
+    background-color: black;
+    padding: 20px;
+    margin: 20px 40px;
+}
+
+
+@property --a {
+    initial-value: 0deg;
+    inherits: false;
+    syntax: '<angle>';
+}
+
+@property --h {
+    initial-value: 0;
+    inherits: false;
+    syntax: '<number>';
+}
+
+#loader {
+    padding: 20px 40px;
+    font-family: monospace;
+    font-weight: bold;
+    color: white;
+    border-style: solid;
+    border-width: 5px;
+    font-size: 14px;
+    --charge: hsl(var(--h, 0), 100%, 50%);
+    -o-border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
+    border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
+    -webkit-animation: load 2s infinite ease-in-out;
+    animation: load 2s infinite ease-in-out;
+}
+
+@-webkit-keyframes load {
+
+    0%,
+    10% {
+        --a: 0deg;
+        --h: 0;
+    }
+
+    100% {
+        --a: 360deg;
+        --h: 100;
+    }
+}
+
+@keyframes load {
+
+    0%,
+    10% {
+        --a: 0deg;
+        --h: 0;
+    }
+
+    100% {
+        --a: 360deg;
+        --h: 100;
+    }
+}
+  
+/* Ending loading section */
+
+
+
+
+
+/* Start Nav section  */
+#nav{
+    background: linear-gradient(-45deg,var(--varpurpleClr) 30%,var(--varpinkpurpleClr) 60%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    padding-top: 8px;
+    padding-bottom: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* z-index: 10; */
+}
+
+.maintitle{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+/* #searchdiv{
+    text-align: center;
+}
+
+#titlediv{
+    text-align: center;
+} */
+
+#searchtext{
+    border: none;
+    background-color: white;
+    border-radius: 15px 0px 0px 15px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    font-size: 14px;
+}
+
+#searchtext:focus{
+    outline: none;
+}
+
+#searchdiv > button{
+    margin-left: -3px;
+    background-color: white;
+    border: none;
+    border-left: 2px dotted var(--varpinkpurpleClr);
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    font-size: 14px;
+    border-radius: 0px 15px 15px 0px;
+}
+
+#searchdiv > button:active{
+    background-color: var(--varpinkpurpleClr);
+    opacity: 0.8;
+    color: white;
+    transition: all 0.2s;
+}
+
+#searchdiv > button:hover{
+    font-size: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#gpsdiv{
+    padding-left: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#currentgps{
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 20px;
+    transition: transform ease-in-out 0.05s;
+}
+
+#currentgps:hover{
+    color: rgb(112, 112, 112);
+}
+
+#currentgps:active{
+    transform: scale(1.4);
+}
+/* End Nav section */
+
+
+
+
+/* Start current section  */
+#currentdiv{
+    text-align: center;
+    display: block;
+}
+
+#announcetxtone{
+    display: inline-block;
+    color: white;
+    /* text-align: center; */
+    font-size: 18px;
+    font-weight: bold;
+    border: 3px double rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    padding: 2px 10px;
+    margin-top: 30px;
+}
+
+#curdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+/* Start for all weather section */
+#alldiv{
+    display: block;
+}
+
+#announcetxttwo{
+    display: inline-block;
+    color: white;
+    /* text-align: center; */
+    font-size: 14px;
+    font-weight: bold;
+    border: 3px double rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    padding: 2px 10px;
+
+    margin-left: 30px;
+}
+
+/* #allweatherdivs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+#minidiv{
+    width: 100vw;
+    display: flex;
+    flex-direction: row-reverse;
+    /* justify-content: center;
+    align-items: center; */
+    /* overflow: visible; */
+    /* overflow-y: scroll; */
+    overflow-x: scroll;
+    transform: rotate(-180deg);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* End for all weather section */
+
+
+
+/* Start footer section  */
+footer{
+    position: fixed;
+    z-index: 10;
+    /* top: 100vh; */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(-45deg,var(--varpinkpurpleClr) 40%,var(--varpurpleClr) 70%);
+    text-align: center;
+    color: white;
+    font-size: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+/* End footer section */
+
+
+
+@media screen and (max-width: 500px) {
+    #nav{
+        background: linear-gradient(-45deg,var(--varpurpleClr) 40%,var(--varpinkpurpleClr) 60%);
+
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #gpsdiv{
+        margin-left: -10px;
+        /* background-color: red; */
+    }
+
+    #announcetxtone{
+        margin-top: 50px;
+    }
+}

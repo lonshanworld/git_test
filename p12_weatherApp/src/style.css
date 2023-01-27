@@ -1,0 +1,130 @@
+.curweatherdiv{
+    /* display: inline-block; */
+    text-align: center;
+    /* margin-top: 20px;
+    margin-bottom: 20px; */
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    margin-bottom: 20px;
+
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    color: black;
+
+    /* box-shadow: rgba(255, 255, 255, 0.6) 0px 5px 15px; */
+    box-shadow: rgba(241, 225, 213, 0.2) 0px 2px 4px 0px, rgba(241, 225, 213, 0.6) 0px 2px 16px 0px;
+    /* box-shadow: rgba(255, 255, 255, 0.16) 0px 3px 6px, rgba(255, 255, 255, 0.23) 0px 3px 6px; */
+
+    transition: all ease-in-out 0.3s;
+}
+
+.curweatherdiv:hover{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.curweatherdiv > *:hover{
+    color: rgb(56, 109, 255);
+    font-weight: bold;
+}
+
+.curimgdiv > img{
+    margin: 0px 20px;
+
+    border-radius: 20px;
+
+    background-color: rgb(165, 165, 165);
+}
+
+.curlocationtxt{
+    display: inline-block;
+    margin-bottom: 7px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+.curcloudtxt{
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.curinfodivs > span:nth-child(2){
+    color: red;
+    font-weight: bold;
+}
+/* End current section */
+
+
+
+
+.miniweatherdiv{
+    /* display: inline-block; */
+    transform: rotate(180deg);
+    text-align: center;
+    font-size: 10px;
+    /* margin-top: 20px;
+    margin-bottom: 20px; */
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    color: black;
+
+    /* box-shadow: rgba(255, 255, 255, 0.6) 0px 5px 15px; */
+    box-shadow: rgba(241, 225, 213, 0.2) 0px 1px 2px 0px, rgba(241, 225, 213, 0.6) 0px 1px 8px 0px;
+    /* box-shadow: rgba(255, 255, 255, 0.16) 0px 3px 6px, rgba(255, 255, 255, 0.23) 0px 3px 6px; */
+
+    transition: all ease-in-out 0.3s;
+}
+
+.miniweatherdiv:hover{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.miniweatherdiv > *:hover{
+    font-weight: bold;
+    color: rgb(56, 109, 255);
+}
+
+.miniimgdiv > img{
+    margin: 0px 20px;
+
+    border-radius: 20px;
+
+    background-color: rgb(165, 165, 165);
+}
+
+.minilocationtxt{
+    display: inline-block;
+    margin-bottom: 7px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+}
+
+.minicloudtxt{
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.miniinfodivs > span:nth-child(2){
+    color: red;
+    font-weight: bold;
+}
