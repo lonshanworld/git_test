@@ -5,7 +5,7 @@ import filtersbtn from "./left/filters";
 import alarmtime from "./alert.js";
 import "./style.css";
 
-window.onload = middleData;
+middleData();
 
 const leftbtn = document.getElementById("btnmenu");
 leftbtn.addEventListener("click",function(){
