@@ -83,15 +83,8 @@ header > span{
     font-size: 16px;
     border-bottom: 3px solid var(--varblack);
 
-    padding-left: 10px;
-    padding-right: 10px;
-
 }
 
-#resultbox{
-    padding-left: 10px;
-    padding-right: 10px;
-}
 
 #resulttext{
     font-size: 14px;
