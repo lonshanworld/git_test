@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;700&display=swap');
+
+:root{
+    --varblack : rgb(42, 54, 59);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    font-family: 'Maven Pro';
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+
+    font-size: 12px;
+    background-color: rgb(244, 247, 247);
+
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+
+    flex-direction: column;
+}
+
+
+
+
+/* Start header section  */
+header{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    color: var(--varblack);
+}
+
+header > span{
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 5px solid var(--varblack);
+}
+/* End header section */
+
+
+
+
+/* Start body section  */
+#body{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+#playground{
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Start result section  */
+#result{
+    grid-column-start: 4;
+    grid-column-end: 6;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 30px;
+
+    color: var(--varblack);
+}
+
+#instruction{
+    font-size: 16px;
+    border-bottom: 3px solid var(--varblack);
+}
+
+#resulttext{
+    font-size: 14px;
+}
+
+#resultnum{
+    font-size: 16px;
+    font-weight: bold;
+
+    border: 3px solid grey;
+    padding: 5px 7px;
+    border-radius: 5px;
+}
+
+
+.btn{
+    border: none;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+
+    background-color: aquamarine;
+    padding: 10px 20px;
+
+    box-shadow: rgba(127, 255, 212, 0.7) 0px 5px 15px;
+}
+
+.btn:hover{
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.btn:active{
+    background-color: black;
+    color: white;
+}
+
+#reloadbtn{
+    background-color: rgb(255, 49, 49);
+    box-shadow: rgba(255, 127, 127, 0.7) 0px 5px 15px;
+}
+
+#reloadbtn:hover{
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0.7);
+}
+/* End result section */
+
+
+/* Start chess section  */
+#chesscover{
+    height: 400px;
+    width: 400px;
+    background-color: rgb(218, 255, 255);
+
+    border: 5px double black;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chess{
+    width: 87%;
+    height: 87%;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+
+    border: 2px solid black;
+}
+
+.chessbox{
+    border: 1px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all ease-in-out 0.2s;
+}
+
+.makegrey{
+    background-color: rgb(167, 167, 167);
+}
+
+.fa-chess-knight{
+    font-size: 30px;
+}
+/* End chess section */
+/* End body section */
+
+
+
+
+
+/* Start footer section  */
+footer{
+    background-color: rgb(30, 30, 30);
+    font-size: 12px;
+    color: rgb(230, 230, 230);
+
+    padding: 5px 0px;
+
+    text-align: center;
+}
+/* End footer section */
+
+
+
+@media screen and (max-width: 800px) {
+    #body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-direction: column;
+    }
+
+    #result{
+        gap: 15px;
+        align-items: center;
+    }
+
+    #instruction{
+        padding-top: 20px;
+    }
+}
+
+
+@media screen and (max-width: 410px) {
+    #chesscover{
+        width: 95vw;
+        height: 95vw;
+    }
+
+    .fa-chess-knight{
+        font-size: 20px;
+    }
+}
