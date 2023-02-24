@@ -1,0 +1,14 @@
+header{
+    background-color: rgb(40, 40, 40);
+    color: white;
+    text-align: center;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+header > span {
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
