@@ -1,0 +1,9 @@
+#instructions{
+    padding: 10px 0px;
+    text-align: left;
+}
+
+.intromainwords{
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
