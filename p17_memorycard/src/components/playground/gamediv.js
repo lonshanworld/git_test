@@ -14,11 +14,21 @@ export default function Gamediv(props){
         "https://media.istockphoto.com/id/958726768/vector/flat-durian-and-cut-piece-vector-with-isolated-white-background-king-of-fruit-tropical-friut.jpg?s=1024x1024&w=is&k=20&c=gW-Wj5LGsjoPVmyifx3ln5ZJ0WiO5X_tjoVEbPlubBY=",
     ];
 
+    function ArrinDiv(){
+        const arr = [];
+        for(let a = 0; a < imagearr.length; a++){
+            arr.push(
+                <div id="{a}" className="imageBox">
+                    <img src={imagearr[a]} alt="fruits{a}" />
+                </div>
+            );
+        }
+        return arr;
+    }
 
     return (
-        <div>
-            <button onClick={()=>props.increase()}>Increase Point</button>
-            <button onClick={()=>props.decrease(3)}>Decrease Point</button>
+        <div id="imagegrid">
+           <ArrinDiv />
         </div>
     );
 }

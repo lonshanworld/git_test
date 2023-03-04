@@ -15,7 +15,7 @@ export default function Playground(){
     }
 
     function decreasepoint(value){
-        console.log(value)
+        console.log(value);
     }
 
     return (
