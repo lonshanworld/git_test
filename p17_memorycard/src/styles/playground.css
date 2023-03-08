@@ -1,3 +1,7 @@
+#playground{
+    padding-bottom: 40px;
+}
+
 #instructions{
     padding: 10px 0px;
     text-align: left;
@@ -5,5 +9,59 @@
 
 .intromainwords{
     font-weight: bold;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid orange;
+}
+
+#gamediv{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#imagegrid{
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    gap: 5px;
+
+    background-color: rgb(225, 194, 231);
+    padding: 10px;
+
+    border-radius: 10px;
+}
+
+img{
+    width: 200px;
+}
+
+
+
+
+@media only screen and (max-width: 850px){
+    img{
+        width: 150px;
+    }
+}
+
+
+
+@media only screen and (max-width: 650px){
+    img{
+        width: 100px;
+    }
+}
+
+
+
+@media only screen and (max-width: 450px){
+    #imagegrid{
+        width: 90vw;
+    }
+
+    img{
+        width: 90px;
+    }
 }
