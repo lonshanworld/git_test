@@ -1,0 +1,102 @@
+#shopdiv {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+
+    padding-bottom: 30px;
+    margin-top: -20px;
+}
+
+#shop {
+    width: 80vw;
+
+    display: grid;
+    grid-template-columns: repeat(1,80vw);
+    align-self: center;
+    gap: 30px;
+
+    text-align: center;
+}
+
+.imgbox > img {
+    width: 60vw;
+
+    border-radius: 10px;
+}
+
+.singlebox {
+    background-color: #333333;
+
+    border-radius: 20px;
+
+    padding: 25px;
+}
+
+.checkdetailbtn {
+    margin-top: 20px;
+
+    padding: 5px 18px;
+}
+
+.checkdetailbtn {
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    user-select: none;
+}
+
+.checkdetailbtn:active{
+    font-weight: bold;
+}
+
+
+
+@media only screen and (min-width: 550px){
+    #shop{
+        width: 85vw;
+        grid-template-columns: repeat(2,40vw);
+    }
+
+    .imgbox > img {
+        width: 30vw;
+    }
+    #shopdiv{
+        margin-top: -40px;
+    }
+}
+
+@media only screen and (min-width: 900px){
+    #shop{
+        grid-template-columns: repeat(3,26vw);
+    }
+
+    .imgbox > img {
+        width: 20vw;
+    }
+    #shopdiv{
+        margin-top: -60px;
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    #shop{
+        grid-template-columns: repeat(4,19.5vw);
+        
+    }
+
+    .imgbox > img {
+        width: 14vw;
+    }
+
+    #shopdiv{
+        margin-top: -100px;
+    }
+}

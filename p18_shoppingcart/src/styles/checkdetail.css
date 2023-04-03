@@ -1,0 +1,97 @@
+#checkdetail{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 30px;
+}
+
+.itembox{
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    text-align: center;
+}
+
+.imgdiv > img{
+    width: 70vw;
+    padding-top: 30px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btndiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px;
+}
+
+.btndiv > button{
+    margin-left: 20px;
+    margin-right: 20px;
+    border: none;
+    background-color: transparent;
+}
+
+.btndiv > button:active{
+    font-weight: bold;
+
+}
+
+.btndiv > span{
+    font-size: 20px;
+    color: grey;
+}
+
+.decreasebtn{
+    color: rgb(255, 57, 57);
+    font-size: 50px;
+}
+
+.increasebtn{
+    color: rgb(57, 57, 255);
+    font-size: 30px;
+}
+
+.addtocartbtn{
+    background-color: #333333;
+    color: white;
+    font-size: 14px;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 10px;
+}
+
+.addtocartbtn:active{
+    opacity: 0.7;
+}
+
+
+@media only screen and (min-width: 800px){
+
+    #checkdetail{
+        margin-top: -14vh;
+    }
+
+    .itembox{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .imgdiv > img{
+        width: 40vw;
+        
+    }
+
+    .itembox > .infodiv{
+        width: 40vw;
+    }
+}
