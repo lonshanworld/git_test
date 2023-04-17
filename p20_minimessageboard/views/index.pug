@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  header
+    p(class="title") Welcome to Miniboard
+
+  div(class="btndiv") 
+    button(class="AddBtn")
+      a(href="/addmessage") Click to add new message!
+
+  hr
+
+  div 
+    each data,index in dataList
+      div.data(class="dataDiv")
+        span No : #{index + 1}
+        span Title : #{data.title}
+        span Text : #{data.text}
+        span createDate : #{data.createDate}
+        span ObjectId : #{data._id}
