@@ -9,6 +9,8 @@ import CookieChecker from "./customhooks/usecookiehook";
 import Postdetail from "./pages/postdetail";
 import ProfileScreen from "./pages/profilescreen";
 import CreatePostScreen from "./pages/createpostscreen";
+import SearchScreen from "./pages/searchscreen";
+import UpdateProfileScreen from "./pages/updateprofilescreen";
 
 // function RouteSwitch(){
 
@@ -60,6 +62,16 @@ const router = createBrowserRouter([
         path:"createpost/:userId",
         element: <CookieChecker><CreatePostScreen/></CookieChecker>,
         caseSensitive:true,
+    },
+    {
+        path: "search/:userId",
+        element : <CookieChecker><SearchScreen/></CookieChecker>,
+        caseSensitive: true,
+    },
+    {
+        path: "updateprofile/:userId",
+        element : <CookieChecker><UpdateProfileScreen/></CookieChecker>,
+        caseSensitive: true,
     },
 ]);
 

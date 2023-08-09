@@ -55,20 +55,19 @@ function VideoCall(props){
             // onMouseDown={handleMouseDown}
             // onMouseUp={handleMouseUp}
             // onMouseMove={handleMouseMove}
-            className="z-0 absolute top-0 right-0 w-56 h-72 border border-cuswood mt-24 mb-14 rounded-2xl">
+            className="z-30 absolute top-0 right-0 w-56 h-72 border border-cuswood mt-24 mb-14 rounded-2xl">
                 <video
-                ref={props.myvideo}
-                autoPlay
-                className="absolute top-0 left-0 w-20 h-24 z-10 rounded-2xl object-cover scale-x-[-1]">
+                    ref={props.myvideo}
+                    autoPlay
+                    muted
+                    className="absolute top-0 left-0 w-24 h-28 z-10 rounded-2xl object-cover scale-x-[-1]">
+                </video>
+                <video
+                    ref={props.othervideo}
+                    autoPlay
                     
-                </video>
-                <video
-               
-                ref={props.othervideo}
-                autoPlay
-                className="z-0 w-full h-full rounded-2xl absolute object-cover scale-x-[-1]">
-
-                </video>
+                    className="z-0 w-full h-full rounded-2xl absolute object-cover scale-x-[-1]">
+                </video>     
                 <div className="w-full h-10 bg-gray-500 bg-opacity-60 absolute bottom-0 z-10 rounded-b-2xl flex justify-center items-center px-3">
                     <button
                     onClick={props.getvideoFunc} 

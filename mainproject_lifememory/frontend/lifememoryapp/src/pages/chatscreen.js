@@ -9,40 +9,60 @@ import Logo from "../assets/logo.png";
 import { ShowLoadingContext } from "../customhooks/showloadingscreen";
 import Chatmessage from "../components/rightchats/chatmessage";
 import VideoCall from "../components/rightchats/videocall";
-import Peer from "simple-peer";
+import Peer from "peerjs";
+import ShowCallingbtn from "../components/btns/showcallingbtn";
+import { UpdateShowAlertContext } from "../customhooks/showalertbox";
+import CalltxtBox from "../components/btns/calltxtbox";
+import VoiceCall from "../components/rightchats/voicecall";
+
 
 function ChatScreen(props){
     const [cookies] = useCookies(["jwtforlifememory"]);
     const [frienddata, setFrienddata] = useState(Object);
     const [imgurl, setImgurl] = useState("");
     const {toggleShowloading} = useContext(ShowLoadingContext);
+    const {toggleAlertBox} = useContext(UpdateShowAlertContext);
     const [originuserimgurl , setOriginuserimgurl] = useState("");
     const [ChatList, setChatlist] = useState([]);
     const [chatroomId, setChatroomId] = useState("");
     
     const {showchatscreenFunc} = useContext(ShowChatScreenContext);
+
     const [showCall , setShowCall] = useState(false)
     const [showacceptcall, setShowacceptcall] = useState(false);
     const inputRef = useRef();
     const myvideoRef = useRef();
     const othervideoRef = useRef();
-    const connectionRef = useRef();
     const [mystream, setmyStream] = useState(null);
-    const [otherstream, setotherSteam] = useState(null);
+    // const [otherstream, setOtherstream] = useState(null);
+    const [othersocketId, setOthersocketId] = useState(null);
+    const [otherpeerId, setOtherpeerId] = useState(null);
+    const [showcalling, setShowcalling] = useState(false);
 
-    const [othersocketId, setOthersocketId] = useState("");
+    const [showVoice, setShowVoice] = useState(false);
+    const [showVoiceCalling, setShowVoiceCalling] = useState(false);
+    const [showAcceptVoice, setShowAcceptVoice] = useState(false);
 
+    const [isVideo, setIsVideo] = useState(false);
     
     const socket = io(`http://localhost:5000`,{
         path : "/chatsocket"
     });
 
+    const mypeer = new Peer(
+        // undefined,
+        // {
+        //     host : "localhost",
+        //     port : "49667",
+        //     path : "/callserver"
+        // }
+    )
+    
+
     function changelist (newmessage){
         
         const scroller = document.getElementById("scrollcontroller");
-        console.log("Checking image urls");
-        console.log("user image "+ originuserimgurl);
-        console.log("friend image " + imgurl);
+    
         setChatlist(prevarr => [...prevarr, newmessage]);
 
         scroller.scrollTop = scroller.scrollHeight;
@@ -71,8 +91,6 @@ function ChatScreen(props){
             const responsetext = await response.json();
 
             const url = getImageUrl(responsetext.message.imageDetailInfo.image.data);
-            console.log(url);
-            console.log("geting image url from url for friend =================");
             setImgurl(url);
         }
     }
@@ -93,8 +111,6 @@ function ChatScreen(props){
             const responsetext = await response.json();
 
             const url = getImageUrl(responsetext.message.imageDetailInfo.image.data);
-            console.log(url);
-            console.log("get iamge data for self ==============================");
             setOriginuserimgurl(url);
         }
     }
@@ -108,8 +124,29 @@ function ChatScreen(props){
         );
         const data = await response.json();
         const chatId = data["chatId"];
+        console.log("This is chat Id " + chatId);
+        // console.log("This is chat Id from main screen " +props.id )
         setChatroomId(chatId);
-        startsocket(chatId)
+        const responsechatlist = await getApiRequest(
+            `${process.env.REACT_APP_BASE_API}chat/getmessages?chatId=${chatId}&startnum=0&amount=20`,
+            cookies.jwtforlifememory,
+        );
+        const datalist = await responsechatlist.json();
+        const reversedatalist = datalist.reverse();
+        for(let a = 0; a < reversedatalist.length; a++){
+            const newmessage = new messageModel(
+                reversedatalist[a]._id === props.originaluserInfo._id ? props.originaluserInfo.userName : frienddata.userName,
+                reversedatalist[a].userId,
+                reversedatalist[a]._id === props.originaluserInfo._id ? originuserimgurl : imgurl,
+                reversedatalist[a].txt,
+                null,
+                reversedatalist[a].createDate,
+            );
+            changelist(newmessage);
+        }   
+
+        startsocket(chatId);
+
     }
 
     const fetchdata = async()=>{
@@ -119,6 +156,7 @@ function ChatScreen(props){
         await getchatsocketid();
         toggleShowloading(false);
     }
+
 
     const allchatlist = useCallback(()=>{
         return ChatList;
@@ -141,113 +179,202 @@ function ChatScreen(props){
         });
         
         socket.on("sendsocketIds",(idlist)=>{
-     
-            console.log("This is inside sendidlist");
-            idlist.map(singleid =>{
+            idlist.forEach(singleid =>{
                 if(singleid !== socket.id){
-                    console.log(singleid);
                     setOthersocketId(singleid);
+                    socket.emit("sendpeerid", [chatid, mypeer.id]);
                 }
             });
-        })
+        });
 
-        socket.on("usercalled",()=>{
-            console.log("inside usercalled");
+        socket.on("receivepeerId", (peerid)=>{
+            setOtherpeerId(peerid);
+        });
+
+
+        mypeer.on("open", (id)=>{
+        });
+        
+        mypeer.on("call", call =>{
+            
+            if(isVideo){
+                setShowCall(true);
+            }else{
+                setShowVoice(true);
+            }
+            navigator.mediaDevices.getUserMedia({
+                video : isVideo,
+                audio : true,
+            }).then((stream) =>{
+                setmyStream(stream);
+                setShowcalling(false);
+                setShowVoiceCalling(false);
+                if(myvideoRef.current !== null){
+                    myvideoRef.current.srcObject = stream;
+                }else{
+                    toggleAlertBox(true, "Media devices not found");
+                }
+                call.answer(stream);
+                
+                call.on("stream", otherstream =>{
+                    if(othervideoRef.current !== null){
+                        othervideoRef.current.srcObject = otherstream;
+                    }else{
+                        toggleAlertBox(true, "Media devices not found");
+                    }
+                });
+                call.on("close", ()=>{
+                    // othervideoRef.current.srcObject = null;
+                    othervideoRef.current.close();
+                });
+                
+            });
+        });
+
+        socket.on("plzacceptcall",()=>{
+            // othervideoRef.current.srcObject = otherstream;
+            // setIsVideo(true);
             setShowacceptcall(true);
         });
 
-        socket.on("callaccepted",()=>{
-            // show both videos
-            console.log("Inside call accepted");
-            // peer.signal(othersocketId);
+        socket.on("plzacceptvoice", ()=>{
+            // setIsVideo(false);
+            setShowAcceptVoice(true);
+        });
+
+        socket.on("dropcall",()=>{
+            if(othervideoRef.current !== null){
+                othervideoRef.current.srcObject = null;
+            }
         });
 
         socket.emit("getallsocketId",chatid);
+
+        mypeer.on("disconnect",()=>{
+            if(othervideoRef.current !== null){
+                othervideoRef.current.srcObject = null;
+            }
+        });
     }
 
-
-    function getvideocall(){
+    async function acceptCall(){
+        setShowacceptcall(false);
         setShowCall(true);
-        // console.log(myvideoRef);
         navigator.mediaDevices.getUserMedia({
             video : true,
             audio : true,
         }).then(stream =>{
             setmyStream(stream);
-            myvideoRef.current.srcObject = stream;
+            if(myvideoRef.current !== null){
+                myvideoRef.current.srcObject = stream;
+            }else{
+                toggleAlertBox(true, "Media devices not found");
+            }
+            const call = mypeer.call(otherpeerId, stream);
+            call.on("stream", otherstream =>{
+                if(othervideoRef.current !== null){
+                    othervideoRef.current.srcObject = otherstream;
+                }else{
+                    toggleAlertBox(true, "Media devices not found");
+                }
+            });
+            call.on("close", ()=>{
+                // othervideoRef.current.srcObject = null;
+                if(othervideoRef.current !== null){
+                    othervideoRef.current.close();
+                }
+            });
+        });
         
-            // console.log(myvideoRef.current.srcObject);
-        })
-    }
-
-    function acceptCall(){
-        setShowacceptcall(false);
-        const peer = new Peer({
-            initiator : false,
-            trickle: false,
-            mystream,
-        });
-        peer.on("signal",()=>{
-            console.log("accept call on signal");
-            socket.emit("answercall",othersocketId);
-        });
-        peer.on("stream",(currentstream)=>{
-            console.log("accept call on stream");
-            setotherSteam(currentstream);
-            othervideoRef.current.srcObject = currentstream;
-        });
-        peer.signal(othersocketId);
-        getvideocall();
-        
-        connectionRef.current = peer;
     }
 
     function callother(){
-        const peer = new Peer({
-            initiator : true,
-            trickle: false,
-            mystream,
-        });
-
-        peer.on("signal",()=>{
-            console.log("call other on signal" + othersocketId);
-            socket.emit("calluser",othersocketId)
-        });
-
-        peer.on("stream",(currentstream)=>{
-            console.log("call other on stream");
-            setotherSteam(currentstream);
-            othervideoRef.current.srcObject = currentstream;
-        });
-        getvideocall();
-        socket.on("callaccepted",()=>{
-            // show both videos
-            console.log("Inside call accepted");
-            peer.signal(othersocketId);
-        });
-        connectionRef.current = peer;
+        if(othersocketId !== null){
+            setShowcalling(true);
+            setIsVideo(true);
+            socket.emit("callother", othersocketId);
+        }else{
+            toggleAlertBox(true, `${frienddata["userName"]} is not online`);
+        }
     }
+
 
     function endCall(){
+        socket.emit("dropcall", othersocketId);
         setShowCall(false);
+        setShowVoice(false);
         myvideoRef.current.srcObject = null;
-        othervideoRef.current.srcObject = null;
-        mystream.getTracks().forEach((track)=>{
-            // if(track.readyState !== "ended"){
-            //     track.st
-            // }
-            track.stop();
-        });
+        if(othervideoRef.current !== null){
+            othervideoRef.current.srcObject = null;
+        }
+        if(mystream !== null){
+            mystream.getTracks().forEach((track)=>{
+                // if(track.readyState !== "ended"){
+                //     track.st
+                // }
+                track.stop();
+            });
+        }
         setmyStream(null);
+        // setOtherstream(null);
+     
     }
+
+
+
+
+    function callvoice(){
+        if(otherpeerId !== null){
+            setShowVoiceCalling(true);
+            setIsVideo(false);
+            socket.emit("callothervoice", othersocketId);
+        }else{
+            toggleAlertBox(true, `${frienddata["userName"]} is not online`);
+        }
+    }
+
+    function acceptvoice(){
+        setShowAcceptVoice(false);
+        setShowVoice(true);
+        navigator.mediaDevices.getUserMedia({
+            video : false,
+            audio : true,
+        }).then(stream =>{
+            setmyStream(stream);
+            myvideoRef.current.srcObject = stream;
+            const call = mypeer.call(otherpeerId, stream);
+            call.on("stream", otherstream =>{
+                othervideoRef.current.srcObject = otherstream;
+            });
+            call.on("close", ()=>{
+                // othervideoRef.current.srcObject = null;
+                if(othervideoRef.current !== null){
+                    othervideoRef.current.close();
+                }
+            });
+        });
+    }
+
+
+    // async function textpeerbtn(){
+    //     console.log("This is my socket id " + socket.id);
+    //     console.log('This is other socket id ' + othersocketId);
+    //     console.log("This is my peer id " + mypeer.id);
+    //     console.log("this is other peer id " + otherpeerId);
+    //     console.log("this is room id " + chatroomId);
+    //     console.log(myvideoRef);
+    // }
 
     useEffect(()=>{
         fetchdata();
-    
+       
         return () => {
             socket.disconnect();
+            socket.close();
+            mypeer.disconnect();
+
         };
-    },[]);
+    },[isVideo]);
 
     return (
         <div 
@@ -264,7 +391,9 @@ function ChatScreen(props){
                     <span className="pl-2">Go back to new feeds</span>
                 </div>
                 <div>
-                    <button className="button mr-2">
+                    <button
+                    onClick={callvoice} 
+                    className="button mr-2">
                         <i className="fa-solid fa-phone fa-lg"></i>
                     </button>
                     <button
@@ -280,19 +409,33 @@ function ChatScreen(props){
                     <span className="pl-2 text-sm truncate">{frienddata["userName"]}</span>
                 </div>
             </div>
-            {showacceptcall&& <button
-                onClick={acceptCall} 
-                className="flex flex-col justify-center px-3 py-2 bg-green-300 text-black items-center active:text-blue-500 rounded-md">
-                    <span className="">Your friend is calling you!</span>
-                    <div className="text-base flex justify-center items-center">
-                        <span>Accept</span>
-                        <i className="fa-solid fa-check fa-lg pl-1"></i>
-                    </div>
-                </button>}
-            {showCall && <VideoCall myvideo={myvideoRef} othervideo={othervideoRef} getvideoFunc={endCall}/>}
+            {
+                showacceptcall && 
+                <ShowCallingbtn func={acceptCall} txt={`${frienddata["userName"]} is calling you with video.`} btntxt="Accept"/> 
+            }
+            {
+                showcalling && 
+                <CalltxtBox txt="Video chat calling ...." />
+            }
+            {
+                showCall && 
+                <VideoCall myvideo={myvideoRef} othervideo={othervideoRef} getvideoFunc={endCall}/>
+            }
+            {
+                showAcceptVoice && 
+                <ShowCallingbtn func={acceptvoice} txt={`${frienddata["userName"]} is calling you with audio.`} btntxt="Accept"/> 
+            }
+            {
+                showVoiceCalling && 
+                <CalltxtBox txt="Voice chat calling ...." />
+            }
+            {
+                showVoice && 
+                <VoiceCall myaudio={myvideoRef} otheraudio={othervideoRef} endcallFunc={endCall} />
+            }
             <div 
             id="scrollcontroller"
-            className="w-full max-h-screen overflow-y-scroll flex-col absolute bottom-14 pb-5">
+            className="w-full z-0 max-h-screen overflow-y-scroll flex-col absolute bottom-14 pb-5 pt-36">
                 {/* {
                     AllChatList.map((chat)=><Chatmessage chatobj={chat} currentuserId={props.originaluserInfo._id} />)
                 } */}

@@ -51,10 +51,10 @@ function CreatePostScreen(){
         );
         toggleShowloading(false);
         if(response.status === 200){
-            console.log(response.status);
+            // console.log(response.status);
             navigate("/main");
         }else{
-            console.log(response.statusText);
+            // console.log(response.statusText);
             toggleShowError(true, response.statusText)
         }
     }

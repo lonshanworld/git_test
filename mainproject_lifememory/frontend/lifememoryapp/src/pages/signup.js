@@ -4,7 +4,7 @@ import Bookform from "../components/bookform";
 import "../styles/loginandsignup.css";
 import CustomInput from "../components/textfield";
 import { useNavigate } from "react-router-dom";
-
+import { useCookies } from "react-cookie";
 import Errorbox from "../components/errorbox";
 import Loadingbox from "../components/loadingbox";
 
@@ -18,6 +18,7 @@ function Signup(){
     const [showerror, setShowerror] = useState(false);
     const [errortext, setErrorText] = useState("");
     const [showloading, setShowloading] = useState(false);
+    const [cookies,setCookie] = useCookies(["jwtforlifememory"]);
 
     let today = new Date();
     let dd = today.getDate();
@@ -42,12 +43,15 @@ function Signup(){
                     `${process.env.REACT_APP_BASE_API}signup`,
                     {
                         method: "POST",
-                        credentials: 'include' ,
+                        // credentials: 'include' ,
                         body: formdata,
                     },
                 );
                 setShowloading(false);
                 if(response.status === 200){
+                    const data = await response.json();
+                    console.log(data["token"])
+                    setCookie('jwtforlifememory', data["token"]);
                     navigate("/main");
                 }else{
                     setErrorText(response.statusText);
@@ -91,30 +95,37 @@ function Signup(){
                         inputtype="text"
                         inputid="username"
                         labeltext="Username"
+                        isSignup={true}
                     />
                     <CustomInput
                         inputref={emailRef}
                         inputtype="email"
                         inputid="email"
                         labeltext="Email"
+                        isSignup={true}
                     />
                     <CustomInput
                         inputref={passwordRef}
                         inputtype="password"
                         inputid="password"
                         labeltext="Password"
+                        isSignup={true}
                     />
                     <CustomInput
                         inputref={confirmPasswordRef}
                         inputtype="password"
                         inputid="confirmpassword"
                         labeltext="Confirmpassword"
+                        isSignup={true}
                     />
                     <div className="ml-12">
                         <label className="text-cuswood mr-3">Birthdate</label>
                         <input ref={birthDateRef} type="date" className="bg-transparent text-cuswood" max={todaytext} required/>
                     </div>
-                    <button type="submit" className="textoppositeClr bg-cuswood py-1 px-3 mr-20 active:text-gray-400 self-end rounded-md">Sign up</button>
+                    <button 
+                    type="submit" 
+                    onClick={signupFunc}
+                    className="text-white bg-cuswood py-1 px-3 mr-20 active:text-gray-400 self-end rounded-md">Sign up</button>
                 </form>
             </Bookform>
         </div>

@@ -35,8 +35,6 @@ const protectAuth = asyncHandler(async(req, res, next)=>{
                 const decodeduserid = jwt.verify(bearertoken,process.env.JWT_SECRETKEY);
         
                 req.user = await userModel.findById(decodeduserid.userId).select("_id");
-                console.log("this is from token auth middleware");
-                console.log(req.user);
                 next();
             }catch(err){
             //    res.status(401).json({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Loadingbox from "../components/loadingbox";
 import {getApiRequest} from "../utils/apiRequests";
@@ -13,7 +13,7 @@ import Middlepartpost from "../components/middlepostscreenparts/middlepartpost";
 import ChatScreen from "./chatscreen";
 
 const ShowChatScreenContext = React.createContext();
-const UserDataContext = React.createContext();
+
 
 function MainScreen(){
     const [cookies] = useCookies(["jwtforlifememory"]);
@@ -92,10 +92,14 @@ function MainScreen(){
     }
 
     function showchatscreenFunc(value, id){
-        console.log("This is chat id " + id);
+        // console.log("This is chat id " + id);
         setShowchatScreen(value);
         setChatid(id);
     }
+
+    const SetChatScreen = useCallback(()=>{
+        return <ChatScreen id={chatid} originaluserInfo={dataobject}/>;
+    },[chatid])
 
     useEffect(()=>{
         // const controller = new AbortController();
@@ -118,12 +122,12 @@ function MainScreen(){
                 <ShowChatScreenContext.Provider value={{showchatscreenFunc}} >
                      <div className="w-full h-screen block sm:grid sm:grid-cols-5 lg:grid-cols-4">
                         <Menudrawer showvalue={showmenu} showFunc={showMenuFunc}/>
-                        <Leftmenu showvalue={showmenu}/>
+                        <Leftmenu showvalue={showmenu} userInfo={dataobject}/>
                         <div className="w-full h-full sm:col-span-3 lg:col-span-2 relative">
                         {
                             (showchatscreen)
                                 ?
-                            <ChatScreen id={chatid} originaluserInfo={dataobject}/>
+                            <SetChatScreen />
                                 :   
                             <Middlepartpost text={dataobject.userName} imgurl={imagedata} originaluserInfo={dataobject}/>
                         }

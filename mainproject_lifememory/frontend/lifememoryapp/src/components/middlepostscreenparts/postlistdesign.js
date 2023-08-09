@@ -8,6 +8,7 @@ import convertTime from "../../utils/convertTimeformat";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import NametoprofileBtn from "../btns/nametoprofilebtn";
+import DeletePostBtn from "../btns/deletepostBtn";
 
 
 function PostListdesign(props){
@@ -149,9 +150,7 @@ function PostListdesign(props){
                         {
                             postInfo.userId === props.originaluserInfo._id
                                 &&
-                            <button className={`text-red-500 pr-3 border-r ${checktheme ? "border-white" : "border-black"}`}>
-                                <i className="fa-solid fa-trash-can fa-xl"></i>
-                            </button>    
+                            <DeletePostBtn postId={postInfo.postId} /> 
                         }
                         <button
                         onClick={commentfunc} 

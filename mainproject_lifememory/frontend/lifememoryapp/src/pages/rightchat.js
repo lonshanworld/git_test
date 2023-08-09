@@ -5,11 +5,18 @@ function Rightchat(props){
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [classvalue, setClasevalue] = useState("fixed w-60 h-5/6 my-14 translate-x-64 z-20");
     const [friendarrayId, setFriendarrayId] = useState([]);
+    const [activeId, setActiveId] = useState("");
 
     function handlesize(){
         setWindowWidth(window.innerWidth);
     }
 
+    function changeActiveId(){
+        // console.log(this.Id);
+        setActiveId(this.Id);
+    }
+
+    
     useEffect(()=>{
         let idlist = props.userData.friends;
         let newList = [];
@@ -42,7 +49,7 @@ function Rightchat(props){
             <p className="h-12 text-lg text-center py-2 border-b-2 border-blue-500">Chats</p>
             <div className="w-full">
                 {
-                    friendarrayId.map(Id => <ChatHead Id={Id} key={Id} />)
+                    friendarrayId.map(Id => <ChatHead Id={Id} key={Id} setactiveIdFunc={changeActiveId} activeId={activeId} />)
                 }
             </div>
         </div>

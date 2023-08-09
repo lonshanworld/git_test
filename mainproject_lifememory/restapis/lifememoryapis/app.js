@@ -1,9 +1,11 @@
 const express = require('express');
+
 const mongoose = require("mongoose");
 // const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const cors = require("cors");
+// const { ExpressPeerServer } = require("peer");
 
 // const session = require("express-session");
 // const userModel = require("./models/usermodel");
@@ -25,8 +27,6 @@ const v1chatRouter = require("./api/v1/chat");
 const v2indexRouter = require("./api/v2/index");
 
 const app = express();
-
-var expressWs = require('express-ws')(app);
 
 async function main(){
     await mongoose.connect(process.env.MONGODB_URL,{ 
@@ -61,11 +61,18 @@ app.use(logger('dev'));
 // app.use(passport.initialize());
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "*",
   methods: 'GET, POST, PUT, DELETE',
   // allowedHeaders: 'Content-Type',
-  credentials: true
+  // credentials: true
 };
+
+// const peerServer = ExpressPeerServer(server, {
+//   // debug: true,
+//   path: "/",
+// });
+// app.get("/callserver/videocall", peerServer);
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -89,6 +96,7 @@ app.use(v1string+"user", v1usersRouter);
 app.use(v1string+"image", v1imageRouter);
 app.use(v1string+"post", v1postRouter);
 app.use(v1string+"chat",v1chatRouter);
+
 
 //for v2
 app.use(v2string, v2indexRouter);

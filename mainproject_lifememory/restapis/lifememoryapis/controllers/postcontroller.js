@@ -71,10 +71,21 @@ const deletepost = [
             const data = matchedData(req);
             const userData = await tokenUser(req);
             const otheruser = await userModel.findOne({posts : data.postId}).exec();
+        
+            if(userData._id.equals(otheruser._id)){
+                await postModel.findByIdAndRemove(data.postId).then(async(success)=>{
+                    await userModel.findByIdAndUpdate(
+                        {_id : otheruser._id},
+                        {$pull : {posts : data.postId}},
+                        {new : true, safe : true},
+                    ).then((suc)=>{
+                        res.status(200).end();
+                    }).catch((err)=>{
+                        res.status(500);
+                        res.statusMessage = "Something went wrong";
+                        res.end();
+                    });
 
-            if(userData._id === otheruser._id){
-                await postModel.findByIdAndRemove(data.postId).then((success)=>{
-                    res.status(200).end();
                 }).catch((err)=>{
                     res.status(404);
                     res.statusMessage = "Post not found";
@@ -107,9 +118,7 @@ const getPost = [
                 const txtdata =  postdetailInfo.bodyText === null ? null : await messageModel.findById(postdetailInfo.bodyText._id).select("-_id -__v -createDate -userId");
                 const userdata = await userModel.findOne({posts : postdetailInfo._id}).exec();
 
-                console.log("Checking data......");
-                console.log(postdetailInfo._id);
-                console.log(userdata);
+            
                 const postdetail = {
                     postId : postdetailInfo._id,
                     userId : userdata._id,
@@ -147,49 +156,9 @@ const getPostbyNum = [
         if(errors.isEmpty()){
             const data = matchedData(req);
 
-            // const userData = await tokenUser(req);
-            // let postIdlist = userData.posts;
 
             const allposts = await postModel.find({postType : "public"}).skip(data.startnum).limit(data.amount).sort({createDate : "desc"}).select("_id").exec();
-            // let postList = [];
-            // for(let b = 0; b < allposts.length; b++){
-            //     const imagedata = allposts[b].bodyImage === null ? null : await imageModel.findById(allposts[b].bodyImage._id).select("-_id -__v -createDate");
-            //     const txtdata =  allposts[b].bodyText === null ? null : await messageModel.findById(allposts[b].bodyText._id).select("-_id -__v -createDate");
-
-            //     if(postIdlist.includes(allposts[b]._id)){
-            //         const newpostmodel = {
-            //             postId : allposts[b]._id,
-            //             userId : userData._id,
-            //             userName: userData.userName,
-            //             createDate : allposts[b].createDate,
-            //             image : imagedata,
-            //             text : txtdata,
-            //             likes : allposts[b].likes,
-            //             contributes : allposts[b].shares,
-            //             messages : allposts[b].messages,
-            //             isuser : true,
-            //         };
-            //         postList.push(newpostmodel);
-            //     }else{
-            //         const otheruserList = await userModel.find({posts : allposts[b]._id}).exec();
-                    
-            //         for(let c = 0; c < otheruserList.length; c++){
-            //             const newpost = {
-            //                 postId : allposts[b]._id,
-            //                 userId : otheruserList[c]._id,
-            //                 userName: otheruserList[c].userName,
-            //                 createDate : allposts[b].createDate,
-            //                 image : imagedata,
-            //                 text : txtdata,
-            //                 likes : allposts[b].likes,
-            //                 contributes : allposts[b].shares,
-            //                 messages : allposts[b].messages,
-            //                 isuser : false,
-            //             };
-            //             postList.push(newpost);
-            //         }
-            //     }
-            // }
+        
 
             res.status(200).send({
                 "message" : {allposts}
@@ -273,14 +242,11 @@ const givecomment = [
         if(errors.isEmpty()){
             const data = matchedData(req);
             const userData = await tokenUser(req);
-            console.log(userData._id);
             const newmessage = new messageModel({
                 txt: req.body.text,
                 userId : userData._id,
             });
-            console.log(newmessage._id);
             await newmessage.save();
-            console.log(newmessage._id);
             await postModel.findByIdAndUpdate(
                 {_id: data.postId},
                 {$addToSet : {messages : newmessage._id}},
@@ -407,7 +373,7 @@ const postdetail = [
                 
                 const userdata = await userModel.findOne({posts : data.postId}).select("_id userName profileImg").exec();
                 const userprofile = await imageModel.findById(userdata.profileImg).exec();
-                const imageurl = userprofile === null ? null : await getImageUrl(userprofile.profileImg.buffer);
+                const imageurl = userprofile === null ? null : await getImageUrl(userprofile.image.buffer);
                 const posttext = singlepost.bodyText !== null ? await messageModel.findById(singlepost.bodyText).exec(): null;
                 const txt = singlepost.bodyText !== null ? posttext.txt : null;
                 const postimage = singlepost.bodyImage !== null ? await imagemodel.findById(singlepost.bodyImage).exec() : null;

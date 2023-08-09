@@ -43,6 +43,14 @@ function Leftmenu(props){
         }
     }
 
+    function gotoSearch(){
+        navigate(`/search/${props.userInfo._id}`);
+    }
+
+    function gotoupdateScreen(){
+        navigate(`/updateprofile/${props.userInfo._id}`);
+    }
+
     useEffect(()=>{
         window.addEventListener("resize",handlesize);
 
@@ -65,6 +73,8 @@ function Leftmenu(props){
         <div className={`transition-all transform duration-500 ease-in-out ${classvalue}  backgroundClr leftsidepageshadow rounded-2xl overflow-y-scroll`}>
             <div className="w-full h-full">
                 <p className="text-lg text-center h-12 py-2 border-b-2 border-green-500">Menu & Settings</p>
+                <LeftBtns text="Find people" classListName="fa-solid fa-magnifying-glass-plus text-xl" func={gotoSearch} />
+                <LeftBtns text="Update profile" classListName="fa-solid fa-retweet text-xl" func={gotoupdateScreen} />
                 <div className="transition-all duration-300 ease-in-out text-center py-2 border-b border-gray-500 mx-5">
                     <button 
                         onClick={()=>setThemedropdown(!themedropdown)}

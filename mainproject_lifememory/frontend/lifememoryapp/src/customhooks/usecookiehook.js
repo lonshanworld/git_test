@@ -8,7 +8,7 @@ function CookieChecker({children}){
     const navigate = useNavigate();
 
     useEffect(()=>{
-        console.log('This is inside useeffect of cookiechecker');
+        // console.log('This is inside useeffect of cookiechecker');
         if(!cookies.jwtforlifememory){
             navigate("/");
         }else{

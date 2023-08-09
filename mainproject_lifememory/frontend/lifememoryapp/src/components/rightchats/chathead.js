@@ -25,16 +25,21 @@ function ChatHead(props){
         }
     }
 
+    function tapchathead(){
+        props.setactiveIdFunc();
+        showchatscreenFunc(true, props.Id);
+    }
+
     useEffect(()=>{
 
         getUserdata(props.Id);
-    },[]);
+    },[props.Id]);
 
     return (
         <div className="mx-5 h-12">
             <button
-            onClick={()=>showchatscreenFunc(true, props.Id)}
-            className="flex justify-start w-full border-b border-gray-500 items-center hover:text-blue-500 active:bg-gray-300 active:text-blue-500">
+            onClick={tapchathead}
+            className={`flex justify-start w-full border-b border-gray-500 items-center hover:text-blue-500 active:bg-gray-300 active:text-blue-500 ${(props.Id === props.activeId) && "text-blue-500"}`}>
                 <img
                 className="h-12 w-12 p-1.5 rounded-full" 
                 src={imageurl === undefined ? Logo : imageurl} />

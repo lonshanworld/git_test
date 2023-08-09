@@ -7,7 +7,7 @@ const tokenUser = async(req)=>{
     const token = bearer[1];
     const decodeduserid = jwt.verify(token,process.env.JWT_SECRETKEY);
 
-    const userdata = await userModel.findById(decodeduserid.userId).select("-password");
+    const userdata = await userModel.findById(decodeduserid.userId).select("-password").exec();
     return userdata;
 };
 

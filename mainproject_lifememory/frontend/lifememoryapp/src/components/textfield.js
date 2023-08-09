@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-function CustomInput({ inputref, inputtype, inputid, labeltext}){
+function CustomInput({ inputref, inputtype, inputid, labeltext, isSignup}){
     const [label, setLabel] = useState(`Enter your ${labeltext}`);
     const labelRef = useRef();
 
@@ -17,7 +17,7 @@ function CustomInput({ inputref, inputtype, inputid, labeltext}){
     }
 
     return (
-        <div>
+        <div className={`${!isSignup && "w-full"}`}>
             <input
                 onBlur={handleBlur} 
                 onFocus={handleFocus} 
@@ -25,7 +25,7 @@ function CustomInput({ inputref, inputtype, inputid, labeltext}){
                 type={inputtype}
                 id={inputid} 
                 name={inputid}
-                className="inputclass"
+                className={`${isSignup ? "inputclass" : "inputclassupdateProfile"}`}
                 required/>
             <label ref={labelRef} htmlFor={inputid} className="labelclass">{label}</label>
         </div>

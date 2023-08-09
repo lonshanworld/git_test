@@ -109,42 +109,32 @@ const loginUser = [
             let errorarray = errors.array().map(function(cur){
                 return cur["msg"];
             });
-
-            // res.status(404).json({
-            //     message: errorarray.join(".  "),
-            // });
+           
             res.status(404);
             res.statusMessage = errorarray.join(".  ");
             res.end();
         }else{
             const findUser = await userModel.findOne({email: req.body.email});
             if(!findUser){
-                // res.status(401).json({
-                //     message: "User not found",
-                // });
+               
                 res.status(401);
                 res.statusMessage = "User not found";
                 res.end();
-            };
-
-            // if(findUser.password !== req.body.password){
-            //     res.status(401).json({
-            //         message: "Incorrect password",
-            //     });
-            // };
-            bcrypt.compare(req.body.password,findUser.password,function(err,response){
-                if(response === false){
-                    res.statusMessage = "Incorrect Password";
-                    res.status(401);
-                    res.end();
-                }else{
-                    generateToken(res, findUser._id);
-                    res.status(200).send({
-                        message: "User found",
-                        token: getToken(findUser._id),
-                    });
-                }
-            });
+            }else{
+                bcrypt.compare(req.body.password,findUser.password,function(err,response){
+                    if(response === false){
+                        res.statusMessage = "Incorrect Password";
+                        res.status(401);
+                        res.end();
+                    }else{
+                        generateToken(res, findUser._id);
+                        res.status(200).send({
+                            message: "User found",
+                            token: getToken(findUser._id),
+                        });
+                    }
+                });
+            }
         }
     }),
 ];

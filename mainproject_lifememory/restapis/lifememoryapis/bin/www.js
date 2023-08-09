@@ -8,12 +8,18 @@ const app = require('../app');
 const debug = require('debug')('lifememoryapis:server');
 const http = require('http');
 const createwebsocket = require('../utils/websocket');
-
+// const { ExpressPeerServer } = require("peer");
+const { PeerServer } = require("peer");
+const fs = require("fs");
+// const sss = require("../../CA/localhost/localhost.decrypted.key");
+// const ddd = require("../../CA/localhost/localhost.crt")
+// const key = fs.readFileSync("/home/lonshan/Documents/odin_projects/git_odin/git_test_odin/mainproject_lifememory/restapis/CA/localhost/localhost.decrypted.key");
+// const cert = fs.readFileSync("/home/lonshan/Documents/odin_projects/git_odin/git_test_odin/mainproject_lifememory/restapis/CA/localhost/localhost.crt");
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT);
 app.set('port', port);
 
 /**
@@ -101,5 +107,18 @@ function onListening() {
 // const io = require('socket.io')(server, {
 //   path: '/my-websocket-path'
 // });
+
+
 createwebsocket(server);
+// const peerServer = ExpressPeerServer(server, {
+//   cors : {
+//     origin : ["http://localhost:3000"]
+//   },
+//   path: "/",
+// });
+// app.get("/callserver/videocall", peerServer);
+
+
+// const peerServer = PeerServer({ port: 49667, path: "/callserver" });
+
 // module.exports = server;

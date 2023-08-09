@@ -12,6 +12,7 @@ import convertTime from "../utils/convertTimeformat";
 import CommentBox from "../components/btns/tinybox/commentbox";
 import NametoprofileBtn from "../components/btns/nametoprofilebtn";
 import EmojiPicker from "emoji-picker-react";
+import DeletePostBtn from "../components/btns/deletepostBtn";
 
 
 const boxarray=[
@@ -172,6 +173,7 @@ function Postdetail(){
 
     useEffect(()=>{
         getFetchData();
+        console.log("This is post Id " + postId);
     },[]);
 
     return(
@@ -190,9 +192,7 @@ function Postdetail(){
                                     </div>
                                 </div>
                                 {
-                                    (postdetail.createrData.id === userId) && <button className="text-red-500">
-                                        <i className="fa-solid fa-trash-can fa-xl"></i>
-                                    </button> 
+                                    (postdetail.createrData.id === userId) && <DeletePostBtn postId={postId} />
                                 }   
                             </div>
                             {

@@ -8,7 +8,6 @@ const UpdateShowErrorContext = React.createContext();
 function ErrorHandler({children}){
     const [showerror, setShowerror] = useState(false);
     const [errortext, setErrortext] = useState("Something went wrong");
-    const [func, setFunc] = useState(()=>{});
 
     function toggleShowError(boolvalue,value){
         setErrortext(value);
@@ -18,7 +17,6 @@ function ErrorHandler({children}){
     function btnfunction(){
         setShowerror(false);
         setErrortext("");
-
     }
     return (
         <UpdateShowErrorContext.Provider value={{toggleShowError}}>

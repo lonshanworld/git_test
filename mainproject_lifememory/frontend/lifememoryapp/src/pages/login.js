@@ -9,9 +9,10 @@ import Bookform from "../components/bookform";
 import { useState } from "react";
 import Errorbox from "../components/errorbox";
 import Loadingbox from "../components/loadingbox";
+import { useCookies } from "react-cookie";
 
 function Login(){
-    // const [cookies] = useCookies(["jwtforlifememory"]);
+    const [cookies,setCookie] = useCookies(["jwtforlifememory"]);
     const emailinputRef = useRef();
     const passwordinputRef = useRef();
     const navigate = useNavigate();
@@ -31,12 +32,15 @@ function Login(){
                 `${process.env.REACT_APP_BASE_API}login`,
                 {
                     method: "POST",
-                    credentials: 'include' ,
-                    body: formdata,
+                    // credentials: 'include' ,
+                    body: formdata
                 },
             );
             setShowloading(false);
             if(response.status === 200){
+                const data = await response.json();
+                console.log(data["token"])
+                setCookie('jwtforlifememory', data["token"]);
                 navigate("/main");
             }else{
                 // console.log(response.statusText);
@@ -81,12 +85,14 @@ function Login(){
                         inputtype="email"
                         inputid="email"
                         labeltext="Email"
+                        isSignup={true}
                     />
                     <CustomInput
                         inputref={passwordinputRef}
                         inputtype="password"
                         inputid="password"
                         labeltext="Password"
+                        isSignup={true}
                     />
                     <button type="submit" className="textoppositeClr bg-cuswood py-1 px-3 self-end mr-20 active:text-gray-400 rounded-md">Login</button>
                 </form>

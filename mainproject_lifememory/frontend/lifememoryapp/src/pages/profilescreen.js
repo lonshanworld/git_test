@@ -261,7 +261,18 @@ function ProfileScreen(){
                                 </form>
                             </div>
                         }
-                        <div className={`backgroundClr flex justify-evenly items-center ${showInfo ? "translate-y-5" : "-translate-y-56"} transition-all duration-300 ease-in-out mx-5 mb-10 shadow-sm shadow-gray-500 py-3 rounded-md`}>
+                        {/* <div className={`backgroundClr flex justify-evenly items-center ${showInfo ? "translate-y-5" : "-translate-y-56"} transition-all duration-300 ease-in-out mx-5 mb-10 shadow-sm shadow-gray-500 py-3 rounded-md`}>
+                            {
+                                btns.map(e =><button key={e}
+                                onClick={()=>btnsFunc(e)} 
+                                className={`active:text-cusblue ${e === btntxt ? "text-cusblue underline underline-offset-4 decoration-2" : "text-gray-400"}`}>
+                                    {e}
+                                </button>)
+                            }
+                        </div> */}
+                    </div>
+                    <div className={`w-full md:h-screen md:w-1/2 lg:w-3/5 ${showInfo ? "translate-y-5 md:translate-y-0" : "-translate-y-56 md:translate-y-0"} flex-col justify-center items-center px-5`}>
+                        <div className={`backgroundClr my-5 flex justify-evenly items-center transition-all duration-300 ease-in-out mx-5 shadow-sm shadow-gray-500 py-3 rounded-md`}>
                             {
                                 btns.map(e =><button key={e}
                                 onClick={()=>btnsFunc(e)} 
@@ -270,9 +281,10 @@ function ProfileScreen(){
                                 </button>)
                             }
                         </div>
-                    </div>
-                    <div className={`w-full md:h-screen md:w-1/2 lg:w-3/5 ${showInfo ? "translate-y-5 md:translate-y-0" : "-translate-y-56 md:translate-y-0"} flex-col justify-center items-center md:overflow-y-scroll px-5`}>
-                        <Showright/>
+                        <div
+                        className="md:h-[calc(100vh-100px)] md:overflow-y-scroll w-full md:w-11/12 mx-auto">
+                            <Showright/>
+                        </div>
                     </div>
                 </div>
             }

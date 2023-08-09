@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {userProfile, addfriend, getProfiledata, removefriend} = require("../../controllers/usercontroller");
+const {userProfile, addfriend, getProfiledata, removefriend, findpeople, updateProfile} = require("../../controllers/usercontroller");
 const {protectAuth} = require("../../middleware/tokenauthmiddleware");
 
 
@@ -8,6 +8,8 @@ router.get("/profile",[protectAuth],userProfile);
 router.post("/addfriend",[protectAuth], addfriend);
 router.post("/removefriend",[protectAuth], removefriend);
 router.get("/",[protectAuth], getProfiledata);
+router.get("/findpeople",[protectAuth],findpeople);
+router.post("/updateprofile",[protectAuth],updateProfile)
 
 module.exports = router;
 

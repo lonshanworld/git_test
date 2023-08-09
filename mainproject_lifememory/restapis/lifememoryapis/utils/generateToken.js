@@ -5,7 +5,6 @@ const generateToken = (res, userId) =>{
     res.cookie("jwtforlifememory", token, {
         httpOnly: false,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
         maxAge: 60*60*24*7*1000,
     })
 };
