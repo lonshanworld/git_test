@@ -124,7 +124,7 @@ function ChatScreen(props){
         );
         const data = await response.json();
         const chatId = data["chatId"];
-        console.log("This is chat Id " + chatId);
+        // console.log("This is chat Id " + chatId);
         // console.log("This is chat Id from main screen " +props.id )
         setChatroomId(chatId);
         const responsechatlist = await getApiRequest(

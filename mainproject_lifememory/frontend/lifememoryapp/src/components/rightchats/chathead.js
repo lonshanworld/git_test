@@ -15,11 +15,11 @@ function ChatHead(props){
         const response = await getApiRequest(`${process.env.REACT_APP_BASE_API}user?userId=${value}`, cookies.jwtforlifememory);
         const data = await response.json();
         setUserdata(data.message.userData);
-        console.log(data.message.userData.profileImg);
+        // console.log(data.message.userData.profileImg);
         if(data.message.userData.profileImg !== null){
             const response = await getApiRequest(`${process.env.REACT_APP_BASE_API}image?imageId=${data.message.userData.profileImg}`, cookies.jwtforlifememory);
             const responsetext = await response.json();
-            console.log(responsetext);
+            // console.log(responsetext);
             const url = getImageUrl(responsetext.message.imageDetailInfo.image.data);
             setImageurl(url);
         }

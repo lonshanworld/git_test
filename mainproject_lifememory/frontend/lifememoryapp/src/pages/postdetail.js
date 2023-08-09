@@ -158,7 +158,7 @@ function Postdetail(){
     }
 
     const ItemList = ()=>{
-        console.log("Is this triggering again???")
+        // console.log("Is this triggering again???")
         switch(minititle){
             case boxarray[0] :
                 return postdetail.likeList.map((e) =><LikeBox name={e.name} image={e.image} accountId={e.id} userId={userId} key={e.id} />).reverse();
@@ -173,7 +173,7 @@ function Postdetail(){
 
     useEffect(()=>{
         getFetchData();
-        console.log("This is post Id " + postId);
+        // console.log("This is post Id " + postId);
     },[]);
 
     return(

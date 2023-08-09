@@ -315,10 +315,18 @@ const share = [
                 {$addToSet : {shares : userData._id}},
                 {new : true, safe:true},
             ).exec().then(async(success) =>{
-                res.status(200);
+
+                userData.shareposts.push(data.postId);
+                await userData.save().then((ok)=>{
+                    res.status(200);
+                    // res.statusMessage = success.toString();
+                    res.end();
+                }).catch((e)=>{
+                    res.status(400);
+                    // res.statusMessage = err.toString();
+                    res.end();
+                })
                 
-                // res.statusMessage = success.toString();
-                res.end();
             }).catch(async(err)=>{
                 res.status(400);
                 // res.statusMessage = err.toString();

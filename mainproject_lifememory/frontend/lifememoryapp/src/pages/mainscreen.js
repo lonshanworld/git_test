@@ -67,7 +67,7 @@ function MainScreen(){
     }
 
     function showErrorBox(){
-        console.log("function react here");
+        // console.log("function react here");
         setShowerror(false);
     }
 

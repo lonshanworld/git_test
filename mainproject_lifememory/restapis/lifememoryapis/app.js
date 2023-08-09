@@ -34,9 +34,11 @@ async function main(){
         useUnifiedTopology: true, 
         useNewUrlParser: true,
      });
-    console.log("mongodb start connected");
+    // console.log("mongodb start connected");
 }
-main().catch(err => console.log(err));
+main().catch(err => {
+  // console.log(err);
+});
 
 app.set('case sensitive routing', true);
 app.use(logger('dev'));
@@ -61,6 +63,7 @@ app.use(logger('dev'));
 // app.use(passport.initialize());
 
 const corsOptions = {
+  // origin : "http:localhost:3000",
   origin: "*",
   methods: 'GET, POST, PUT, DELETE',
   // allowedHeaders: 'Content-Type',

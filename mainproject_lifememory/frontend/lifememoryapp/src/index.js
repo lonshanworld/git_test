@@ -8,6 +8,9 @@ import router from './routeswitch';
 import ErrorHandler from './customhooks/errorhander';
 import ShowLoadingScreen from './customhooks/showloadingscreen';
 import AlertHandler from './customhooks/showalertbox';
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+
+if(process.env.NODE_ENV === "production")disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -5,7 +5,7 @@ function Chatdrawer(props){
     const btnref = useRef();
 
     function chatOnclick(){
-        console.log(btnref.current.classList);
+        // console.log(btnref.current.classList);
         if(!props.showvalue){
             
             iconref.current.classList.add("fa-beat-fade");

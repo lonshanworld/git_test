@@ -18,10 +18,11 @@ function PostListdesign(props){
     const [sharestate, setShareState] = useState(false);
     const [postInfo, setPostInfo] = useState(Object);
     const [showpost, setShowpost] = useState(false);
+    const [shownotfound, setShownotfound] = useState(true);
     const navigate = useNavigate();
 
     function imageUrl(){
-        if(postInfo.image !== null){
+        if(postInfo.image !== null || postInfo.image !== undefined){
             if(postInfo.image.data.length === 0){
                 return null;
             }else{
@@ -35,30 +36,32 @@ function PostListdesign(props){
 
     async function getpostDetail(){
         const response = await getApiRequest(`${process.env.REACT_APP_BASE_API}post/getpost?postId=${props.postId}`,cookies.jwtforlifememory);
-        const data = await response.json();
-        const postdata = data.message.postdetail;
+        if(response.status !== 200){
+            
+            setShowpost(true);
+        }else{
+            const data = await response.json();
 
-        let likearray = postdata["likes"];
-        likearray.map((singlelike) =>{
-            if(singlelike === props.originaluserInfo._id){
-                setLikeState(true);
-            }
-        });
-        let sharearray = postdata["contributes"];
-        sharearray.map((singleshare)=>{
-            if(singleshare === props.originaluserInfo._id){
-                setShareState(true);
-            }
-        });
-        setPostInfo(postdata);
-        setShowpost(true);
+            const postdata = data.message.postdetail;
+
+            let likearray = postdata["likes"];
+            likearray.map((singlelike) =>{
+                if(singlelike === props.originaluserInfo._id){
+                    setLikeState(true);
+                }
+            });
+            let sharearray = postdata["contributes"];
+            sharearray.map((singleshare)=>{
+                if(singleshare === props.originaluserInfo._id){
+                    setShareState(true);
+                }
+            });
+            setPostInfo(postdata);
+            setShownotfound(false);
+            setShowpost(true);
+            
+        }
         
-        // if(postdata.likes !== undefined){
-        //     console.log(postdata.likes.length);
-        // }else{
-        //     console.log("There is no like");
-        // }
-        // console.log(postdata.likes);
     }
 
     async function likefunc(){
@@ -71,9 +74,9 @@ function PostListdesign(props){
                 null,
                 );
             if(response.status === 200){
-                console.log("Liked successfully");
+                // console.log("Liked successfully");
             }else{
-                console.log("Like Failed");
+                // console.log("Like Failed");
                 setLikeState(false);
             }    
         }else{
@@ -83,9 +86,9 @@ function PostListdesign(props){
                 null,
             );
             if(response.status === 200){
-                console.log("Unlike successfully");
+                // console.log("Unlike successfully");
             }else{
-                console.log("Like Failed");
+                // console.log("Like Failed");
                 setLikeState(true);
             }        
         }
@@ -105,9 +108,9 @@ function PostListdesign(props){
                 null,
             );
             if(response.status === 200){
-                console.log("share successfully");
+                // console.log("share successfully");
             }else{
-                console.log("share unsuccess");
+                // console.log("share unsuccess");
                 setShareState(false);
             }
         }else{
@@ -117,9 +120,9 @@ function PostListdesign(props){
                 null,
             );
             if(response.status === 200){
-                console.log("unshare success");
+                // console.log("unshare success");
             }else{
-                console.log("unshare unsuccess");
+                // console.log("unshare unsuccess");
                 setShareState(true);
             }
         }
@@ -132,49 +135,57 @@ function PostListdesign(props){
     return (
         <>
         {
-            showpost && 
-            <div
-            className={`block backgroundClr w-auto h-auto mx-6 my-6 p-5 ${!checktheme && "shadow-sm shadow-gray-500"} rounded-md`}>
-                <div 
-                
-                className="flex justify-between items-center ">
-                    <div className="flex justify-start items-center">
-                        <img className="w-10 h-10 mr-5 rounded-full border border-cuswood" src={Logo} alt="profileimage" />
-                        <div className="flex justify-start items-start flex-col">
-                            {/* <span className="text-sm">{postInfo.userName}</span> */}
-                            <NametoprofileBtn name={postInfo.userName} accountId={postInfo.userId} userId={props.originaluserInfo._id}/>
-                            <span className="text-xs text-gray-500">{convertTime(postInfo.createDate)}</span>
-                        </div>
-                    </div>
-                    <div>
-                        {
-                            postInfo.userId === props.originaluserInfo._id
-                                &&
-                            <DeletePostBtn postId={postInfo.postId} /> 
-                        }
-                        <button
-                        onClick={commentfunc} 
-                        className="active:bg-gray-500 active:bg-opacity-20 text-cusblue rounded-md px-3 py-1">
-                            <span>View</span>
-                        </button>
-                    </div>
-                </div>
-                <div className="py-3">
-                    <span className="text-sm">
-                        {postInfo.text === null ? "" : postInfo.text}
-                    </span>
-                </div>
+            showpost && <>
                 {
-                    postInfo.image !== null &&  <div className="m-5">
-                    <img className="w-full bg-fuchsia-600 flex justify-center items-center" src={imageUrl()} alt="postimage" />
-                </div>
+                    shownotfound 
+                        ?
+                        <div className={`block backgroundClr w-auto h-auto mx-6 my-6 p-5 ${!checktheme && "shadow-sm shadow-gray-500"} rounded-md`}>
+                            <p className="text-base text-center">Post not found</p>
+                        </div>
+                        :
+                        <div
+                            className={`block backgroundClr w-auto h-auto mx-6 my-6 p-5 ${!checktheme && "shadow-sm shadow-gray-500"} rounded-md`}>
+                                <div className="flex justify-between items-center ">
+                                    <div className="flex justify-start items-center">
+                                        <img className="w-10 h-10 mr-5 rounded-full border border-cuswood" src={Logo} alt="profileimage" />
+                                        <div className="flex justify-start items-start flex-col">
+                                            {/* <span className="text-sm">{postInfo.userName}</span> */}
+                                            <NametoprofileBtn name={postInfo.userName} accountId={postInfo.userId} userId={props.originaluserInfo._id}/>
+                                            <span className="text-xs text-gray-500">{convertTime(postInfo.createDate)}</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {
+                                            postInfo.userId === props.originaluserInfo._id
+                                                &&
+                                            <DeletePostBtn postId={postInfo.postId} /> 
+                                        }
+                                        <button
+                                        onClick={commentfunc} 
+                                        className="active:bg-gray-500 active:bg-opacity-20 text-cusblue rounded-md px-3 py-1">
+                                            <span>View</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="py-3">
+                                    <span className="text-sm">
+                                        {postInfo.text === null ? "" : postInfo.text}
+                                    </span>
+                                </div>
+                                {
+                                    postInfo.image !== null &&  <div className="m-5">
+                                    <img className="w-full bg-fuchsia-600 flex justify-center items-center" src={imageUrl()} alt="postimage" />
+                                </div>
+                                }
+                                <div className="flex justify-around items-center">
+                                    <TextwithIconBtn show={likestate} iconClass="fa-thumbs-up" txt="Like" btnfunc={likefunc} />
+                                    <TextwithIconBtn show={false} iconClass="fa-message" txt="Comment" btnfunc={commentfunc} />
+                                    <TextwithIconBtn show={sharestate} iconClass="fa-share" txt="Share" btnfunc={sharefunc} />
+                                </div>
+                            </div>
                 }
-                <div className="flex justify-around items-center">
-                    <TextwithIconBtn show={likestate} iconClass="fa-thumbs-up" txt="Like" btnfunc={likefunc} />
-                    <TextwithIconBtn show={false} iconClass="fa-message" txt="Comment" btnfunc={commentfunc} />
-                    <TextwithIconBtn show={sharestate} iconClass="fa-share" txt="Share" btnfunc={sharefunc} />
-                </div>
-            </div>
+            </>
+            
         }
         </>
     );

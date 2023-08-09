@@ -16,7 +16,7 @@ function createwebsocket(server){
     
       
     io.on('connection', (socket) => {
-        console.log('A user connected');
+        // console.log('A user connected');
         socket.on("joinRoom", async(room) =>{
             socket.join(room);
         });
@@ -39,7 +39,7 @@ function createwebsocket(server){
                     await newmessage.save();
                     chat.chatList.push(newmessage._id);
                     await chat.save();
-                    console.log("This is message id "+ newmessage._id);
+                    // console.log("This is message id "+ newmessage._id);
                 }
     
                 if(txt["img"] !== null){
@@ -50,7 +50,7 @@ function createwebsocket(server){
                     await newimage.save();
                     chat.chatList.push(newimage._id);
                     await chat.save();
-                    console.log("This is img id " + newimage._id);
+                    // console.log("This is img id " + newimage._id);
                 }
 
                 const newmesage = {
@@ -60,10 +60,10 @@ function createwebsocket(server){
                     img : txt["img"],
                     datetime : new Date(),
                 }
-                console.log(room);
+                // console.log(room);
                 io.to(room).emit("receiveMessage",newmesage);
             }else{
-                console.log("Chat doesnot exist");
+                // console.log("Chat doesnot exist");
             }
 
             
@@ -79,10 +79,10 @@ function createwebsocket(server){
 
         socket.on("getallsocketId",async(room)=>{
             const sockets =await io.in(room).fetchSockets();
-            console.log("Getting all socket ids");
+            // console.log("Getting all socket ids");
             let idlist = [];
             sockets.map(singlesocket =>{
-                console.log(singlesocket.id);
+                // console.log(singlesocket.id);
                 idlist.push(singlesocket.id);
             });
             io.to(room).emit("sendsocketIds",idlist);
@@ -93,11 +93,11 @@ function createwebsocket(server){
         });
 
         socket.on('disconnect', () => {
-            console.log('user disconnected');
+            // console.log('user disconnected');
         });
 
         socket.on("callother",id=>{
-            console.log("call other working");
+            // console.log("call other working");
             socket.to(id).emit("plzacceptcall");
         });
 

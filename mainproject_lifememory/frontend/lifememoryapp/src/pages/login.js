@@ -39,7 +39,7 @@ function Login(){
             setShowloading(false);
             if(response.status === 200){
                 const data = await response.json();
-                console.log(data["token"])
+                // console.log(data["token"])
                 setCookie('jwtforlifememory', data["token"]);
                 navigate("/main");
             }else{
@@ -58,7 +58,7 @@ function Login(){
     }
 
     function showErrorBox(){
-        console.log("function react here");
+        // console.log("function react here");
         setShowerror(false);
     }
 

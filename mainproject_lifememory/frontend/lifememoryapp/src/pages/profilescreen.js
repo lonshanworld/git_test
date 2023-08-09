@@ -66,7 +66,7 @@ function ProfileScreen(){
             const rawdata = await response.json();
             const originalrawdata = await originaluserresponse.json();
             toggleShowloading(false);
-            console.log(rawdata["message"]["userData"]);
+            // console.log(rawdata["message"]["userData"]);
             
             setUserInfo(rawdata["message"]["userData"]);
             setOriginaluserInfo(originalrawdata["message"]["userData"]);
@@ -128,7 +128,7 @@ function ProfileScreen(){
             formdata,
         );
         toggleShowloading(false);
-        console.log(response.status);
+        // console.log(response.status);
         if(response.status === 200){
             memoRef.current.value = "";
         }else{
@@ -149,7 +149,11 @@ function ProfileScreen(){
                     }
                 </>
             }else if(btntxt === btns[2]){
-                return <p>This is shares section and we will add this new feature in new update.</p>
+                return <>
+                    {
+                        userInfo["shareposts"].map((e)=><PostListdesign postId={e} key={e} originaluserInfo={originaluserInfo} />)
+                    }
+                </>
             }else{
                 return <p>We will add this new feature in new update.</p>
             }

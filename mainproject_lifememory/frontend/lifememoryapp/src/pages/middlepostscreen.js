@@ -43,7 +43,7 @@ function Middlepostscreen(props){
             <div className="flex justify-center items-center">
                 <button 
                 onClick={()=>{
-                    console.log("see more function");
+                    // console.log("see more function");
                     getpostdata(3);
                 }}
                 className="flex justify-center items-center hover:text-gray-600 active:text-gray-600">
